@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HallPass | Event Hall Reservation & Management</title>
+  <meta name="description" content="Check availability, submit booking requests, customize floor layouts, and manage event hall reservations with ease.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="header">
+    <div class="container header-nav">
+      <div class="brand-logo" id="brand-home-link">
+        <div class="brand-icon">🏛️</div>
+        <span>HallPass</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a class="nav-link active" data-target="calendar-section">Calendar & Booking</a></li>
+        <li><a class="nav-link" data-target="admin-section">Admin Portal</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Theme">🌙</button>
+        <button class="btn btn-primary btn-sm" id="hero-book-now-btn">Book Date</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PUBLIC CUSTOMER SECTION -->
+  <main class="section" id="calendar-section">
+    <div class="container">
+      
+      <!-- Hero Banner -->
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge">✨ Premium Venue Booking</div>
+            <h1 class="hero-title">Reserve The Royal Sovereign Event Hall</h1>
+            <p class="hero-subtitle">
+              Browse available dates on our live interactive calendar, pick your floor layout, select add-on services, and submit your reservation request in seconds.
+            </p>
+
+            <div class="hero-features">
+              <div class="hero-feature-item">
+                <span>👥</span> <span>Capacity: Up to 500 Guests</span>
+              </div>
+              <div class="hero-feature-item">
+                <span>❄️</span> <span>Climate Controlled</span>
+              </div>
+              <div class="hero-feature-item">
+                <span>🎙️</span> <span>State-of-the-Art AV & Stage</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+              <a href="#calendar-container" class="btn btn-primary">
+                View Available Dates &darr;
+              </a>
+              <button class="btn btn-secondary" onclick="document.querySelector('.nav-link[data-target=admin-section]').click();">
+                Admin Manager &rarr;
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div class="hero-card">
+              <img src="assets/hero-hall.jpg" alt="Royal Sovereign Event Hall Interior" class="hero-img" onerror="this.src='https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80';">
+              <div class="hero-card-overlay">
+                <h4>The Royal Sovereign Ballroom</h4>
+                <p>Ideal for Weddings, Banquets, Corporate Conventions, & Galas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Customer Reference Lookup Card -->
+      <div class="lookup-card">
+        <div class="lookup-title-group">
+          <h3>🔍 Already Have a Booking Request?</h3>
+          <p>Enter your Reference ID (e.g. #HALL-7821) or Email to check status or upload payment transfer proof.</p>
+        </div>
+        <form class="lookup-form-wrap" id="lookup-request-form">
+          <input type="text" class="form-control" id="lookup-ref-input" placeholder="e.g. HALL-7821 or name@example.com" required>
+          <button type="submit" class="btn btn-primary">Lookup</button>
+        </form>
+      </div>
+
+      <!-- Calendar Legend & Header -->
+      <div class="section-header">
+        <h2 class="section-title">Hall Reservation Schedule</h2>
+        <p class="section-subtitle">Select any green available date to start your booking request</p>
+      </div>
+
+      <div class="status-legend">
+        <div class="legend-item">
+          <div class="legend-dot available"></div>
+          <span>Available</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot pending"></div>
+          <span>Pending Review</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot booked"></div>
+          <span>Booked</span>
+        </div>
+      </div>
+
+      <!-- Calendar Card Container -->
+      <div class="calendar-card" id="calendar-container">
+        <!-- Rendered dynamically by Calendar.js -->
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ADMIN MANAGER SECTION -->
+  <main class="section admin-section" id="admin-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Admin Management Portal</h2>
+        <p class="section-subtitle">Review incoming reservation requests, approve dates, export reports, and configure offline payments</p>
+      </div>
+
+      <!-- Admin Login Card -->
+      <div id="admin-login-card" style="max-width: 440px; margin: 2rem auto;">
+        <div class="calendar-card" style="text-align: center;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔒</div>
+          <h3 style="margin-bottom: 0.5rem;">Admin Authentication</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            Please enter your administrator password to access request controls.
+          </p>
+
+          <form id="admin-login-form">
+            <div class="form-group">
+              <input type="password" class="form-control" id="admin-password-input" placeholder="Enter password (demo: admin123)" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 0.75rem;">Login to Dashboard</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="fill-demo-pass-btn" style="width: 100%;">Auto-fill Demo Password (admin123)</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard Content (Hidden until auth) -->
+      <div id="admin-dashboard-content" style="display: none;">
+        
+        <!-- Header Actions -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem;">Dashboard Overview</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Live reservation statistics, audit controls, and export tools</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" id="export-csv-btn">📊 Export CSV</button>
+            <button class="btn btn-secondary btn-sm" id="reset-demo-btn">Reset Demo Data</button>
+            <button class="btn btn-outline btn-sm" id="admin-logout-btn">Logout</button>
+          </div>
+        </div>
+
+        <!-- KPI Grid Cards -->
+        <div class="admin-kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon primary">📋</div>
+            <div>
+              <div class="kpi-value" id="kpi-total">0</div>
+              <div class="kpi-label">Total Requests</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon pending">⏳</div>
+            <div>
+              <div class="kpi-value" id="kpi-pending">0</div>
+              <div class="kpi-label">Pending Review</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon approved">✅</div>
+            <div>
+              <div class="kpi-value" id="kpi-approved">0</div>
+              <div class="kpi-label">Approved Events</div>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon revenue">💵</div>
+            <div>
+              <div class="kpi-value" id="kpi-revenue">$0</div>
+              <div class="kpi-label">Booked Revenue</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Toolbar & Filters -->
+        <div class="admin-toolbar">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Requests</button>
+            <button class="filter-tab" data-filter="pending">Pending</button>
+            <button class="filter-tab" data-filter="approved">Approved</button>
+            <button class="filter-tab" data-filter="rejected">Rejected</button>
+          </div>
+
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="form-control" id="admin-search-input" placeholder="Search by name, email, ref ID...">
+          </div>
+        </div>
+
+        <!-- Bookings Table -->
+        <div class="table-responsive" style="margin-bottom: 2.5rem;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Ref ID</th>
+                <th>Customer</th>
+                <th>Requested Date</th>
+                <th>Event & Layout</th>
+                <th>Status & Payment</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Rendered by Admin.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="calendar-card" style="max-width: 720px; margin: 0 auto;">
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Offline Payment & Venue Settings</h3>
+          <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.5rem;">
+            Configure bank account details displayed to customers upon request submission.
+          </p>
+
+          <form id="admin-settings-form">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Venue Hall Name</label>
+                <input type="text" class="form-control" id="setting-hall-name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Daily Hall Rate ($)</label>
+                <input type="number" class="form-control" id="setting-daily-rate" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Bank Name</label>
+                <input type="text" class="form-control" id="setting-bank-name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Account Number</label>
+                <input type="text" class="form-control" id="setting-account-number" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Account Beneficiary Name</label>
+                <input type="text" class="form-control" id="setting-account-name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Offline Payment Window (Hours)</label>
+                <input type="number" class="form-control" id="setting-deadline-hours" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">Save Settings</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+
+  <!-- CUSTOMER BOOKING REQUEST MODAL -->
+  <div class="modal-backdrop" id="booking-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Request Hall Booking</h3>
+          <span style="font-size: 0.8rem; color: var(--status-available); font-weight: 700;" id="booking-modal-rate"></span>
+        </div>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="booking-request-form">
+          
+          <div class="form-group">
+            <label class="form-label">Selected Reservation Date *</label>
+            <input type="date" class="form-control" id="book-date-input" required>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" id="book-name-input" placeholder="e.g. Sarah Connor" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" id="book-email-input" placeholder="e.g. sarah@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" class="form-control" id="book-phone-input" placeholder="e.g. +1 (555) 019-2834" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Event Type *</label>
+              <select class="form-control" id="book-event-type-input" required>
+                <option value="Wedding Reception">Wedding Reception</option>
+                <option value="Birthday Party">Birthday Party</option>
+                <option value="Corporate Conference">Corporate Conference</option>
+                <option value="Gala / Banquet">Gala / Banquet</option>
+                <option value="Concert / Musical">Concert / Musical</option>
+                <option value="Other Celebration">Other Celebration</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Floor Layout Picker -->
+          <div class="form-group">
+            <label class="form-label">Floor Layout Preference</label>
+            <div class="layout-options-grid">
+              <div class="layout-option-card selected" data-layout="Banquet Style">
+                <div class="layout-icon">🍽️</div>
+                <div class="layout-title">Banquet Style</div>
+              </div>
+              <div class="layout-option-card" data-layout="Theater Seating">
+                <div class="layout-icon">🎭</div>
+                <div class="layout-title">Theater Seating</div>
+              </div>
+              <div class="layout-option-card" data-layout="Cocktail Party">
+                <div class="layout-icon">🍸</div>
+                <div class="layout-title">Cocktail Party</div>
+              </div>
+              <div class="layout-option-card" data-layout="U-Shape Conference">
+                <div class="layout-icon">📐</div>
+                <div class="layout-title">U-Shape Meeting</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Addon Services Checklist -->
+          <div class="form-group">
+            <label class="form-label">Optional Add-On Services</label>
+            <div class="addons-list">
+              <label class="addon-checkbox-label">
+                <div>
+                  <input type="checkbox" class="addon-checkbox" data-name="Premium Lighting & Stage" data-price="300">
+                  <span style="margin-left: 8px; font-weight: 500;">Premium Stage & Ambient Chandelier Lighting</span>
+                </div>
+                <strong>+$300</strong>
+              </label>
+
+              <label class="addon-checkbox-label">
+                <div>
+                  <input type="checkbox" class="addon-checkbox" data-name="Audio System & Mics" data-price="200">
+                  <span style="margin-left: 8px; font-weight: 500;">Pro Audio System & Wireless Microphones</span>
+                </div>
+                <strong>+$200</strong>
+              </label>
+
+              <label class="addon-checkbox-label">
+                <div>
+                  <input type="checkbox" class="addon-checkbox" data-name="Catering Kitchen Access" data-price="150">
+                  <span style="margin-left: 8px; font-weight: 500;">Catering Kitchen & Chafing Dish Prep Access</span>
+                </div>
+                <strong>+$150</strong>
+              </label>
+
+              <label class="addon-checkbox-label">
+                <div>
+                  <input type="checkbox" class="addon-checkbox" data-name="High-Speed Wi-Fi" data-price="100">
+                  <span style="margin-left: 8px; font-weight: 500;">Dedicated High-Speed Guest Wi-Fi Network</span>
+                </div>
+                <strong>+$100</strong>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Summary Widget -->
+          <div class="price-summary-box">
+            <div class="price-row">
+              <span>Hall Daily Rental Base Rate:</span>
+              <strong id="calc-base-price">$1,500</strong>
+            </div>
+            <div class="price-row">
+              <span>Selected Add-ons Total:</span>
+              <strong id="calc-addons-price">$0</strong>
+            </div>
+            <div class="price-row total">
+              <span>Estimated Total Request Price:</span>
+              <span id="calc-total-price">$1,500</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Estimated Guest Count</label>
+            <input type="number" class="form-control" id="book-guests-input" placeholder="e.g. 200" min="1" max="500" value="150">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Special Requirements / Notes</label>
+            <textarea class="form-control" id="book-notes-input" placeholder="Mention catering needs, stage setup, lighting, or specific timing..."></textarea>
+          </div>
+
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+            ℹ️ Submitting this form will temporarily reserve your chosen date while management reviews your request. Offline payment instructions will be provided next.
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" form="booking-request-form" class="btn btn-primary">Submit Booking Request</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- OFFLINE PAYMENT CONFIRMATION & PROOF SUBMISSION MODAL -->
+  <div class="modal-backdrop" id="payment-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Booking Request Registered! 🎉</h3>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">
+          Your reservation request is registered under reference <strong id="pay-modal-ref" style="color: var(--primary);">#HALL-0000</strong> for <strong id="pay-modal-date">YYYY-MM-DD</strong>.
+        </p>
+
+        <div class="payment-notice-box">
+          <div class="payment-notice-title">
+            <span>🏦</span> <span>Offline Bank Transfer Guidelines</span>
+          </div>
+          <p style="font-size: 0.875rem; color: var(--text-muted);">
+            To confirm your reservation, please transfer the initial deposit to our official venue account within <strong id="pay-modal-deadline">48 hours</strong>:
+          </p>
+
+          <ul class="bank-details-list">
+            <li><span>Bank:</span> <strong id="pay-modal-bank">Apex Bank</strong></li>
+            <li><span>Account No:</span> <strong id="pay-modal-account-no">4092-8819-2041</strong></li>
+            <li><span>Account Name:</span> <strong id="pay-modal-account-name">HallPass Event Management Ltd</strong></li>
+            <li><span>Payment Ref:</span> <strong id="pay-modal-ref-sub">Include your Ref ID above</strong></li>
+          </ul>
+
+          <!-- Customer Submit Payment Proof -->
+          <form id="payment-proof-form" style="margin-top: 1rem; border-top: 1px dashed var(--border-color); padding-top: 1rem;">
+            <input type="hidden" id="proof-ref-id-hidden">
+            <label class="form-label" style="font-size: 0.85rem;">Already made the bank transfer? Submit your transaction ref:</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" class="form-control" id="proof-txn-input" placeholder="e.g. TXN-99841029 or Bank Transfer Reference" required>
+              <button type="submit" class="btn btn-primary btn-sm">Submit Proof</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ADMIN DETAILS MODAL -->
+  <div class="modal-backdrop" id="details-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Booking Details & Action</h3>
+        <button class="modal-close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal-body" id="details-modal-body">
+        <!-- Rendered by Admin.js -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Close</button>
+        <button type="button" class="btn btn-primary" id="save-payment-status-btn">Save Payment Status</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
