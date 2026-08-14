@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "hallpass-event-app",
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}

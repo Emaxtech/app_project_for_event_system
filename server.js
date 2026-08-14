@@ -46,5 +46,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`HallPass Server running at http://localhost:${PORT}`);
+  console.log(`Echelon Event Booking Portal Server running at http://localhost:${PORT}`);
 });

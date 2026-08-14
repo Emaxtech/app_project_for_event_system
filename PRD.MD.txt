@@ -1,0 +1,86 @@
+
+
+Here is your updated Product Requirements Document (PRD) with the project name officially changed to **ECHELON EVENT BOOKING PORTAL**:
+
+---
+
+# Product Requirements Document (PRD): ECHELON EVENT BOOKING PORTAL
+
+## 1. App Overview
+* **App Name / Working Title:** ECHELON EVENT BOOKING PORTAL
+* **Short Summary:** A simple web-based application where customers can check available dates on a calendar and submit a booking request, and administrators can review, approve, or reject those requests. Payments are handled offline.
+* **Problem Statement:** Renting event halls usually involves messy phone calls, paper calendars, and double-bookings. 
+* **Purpose of the App:** To digitize and streamline the hall reservation process, making it easy for customers to request a date and simple for staff to manage their schedule.
+
+## 2. User and Audience
+* **Who the App is For:** 
+  1. *Customers:* Individuals looking to rent the hall for events (weddings, birthdays, meetings).
+  2. *Admin/Staff:* Event center managers who control the calendar and approve/reject bookings.
+* **Main User Needs:** Clear visibility of free/busy dates and a transparent way to request a date without immediate online payment friction.
+* **User Journey (Customer):** Opens the Echelon Portal -> Views calendar -> Picks an available date -> Fills out a short form (Name, Event Type, Contact Info) -> Submits request -> Receives confirmation that the request is pending review.
+* **User Journey (Admin):** Logs in -> Views list of pending booking requests -> Approves or rejects -> Calendar automatically updates.
+
+## 3. Goals and Success
+* **Main Goals:** Eliminate double-bookings and reduce phone-tag between customers and staff.
+* **What Success Looks Like:** Customers can successfully request dates online, and admins can manage the calendar in under a minute per request.
+
+## 4. Scope
+* **What is included in Version 1:**
+  * Public calendar view showing booked/available dates.
+  * Booking request form for customers.
+  * Simple Admin Dashboard to view, approve, or reject requests.
+  * Offline payment instructions shown to the user once approved.
+* **What is NOT included in Version 1:**
+  * Online payment gateways (Stripe, PayPal, etc.).
+  * User accounts/profiles for customers (guests can just book via a form).
+  * Automated email/SMS notifications (admins manually coordinate offline).
+
+## 5. Features and Functionality
+1. **Calendar View (Public)**
+   * *What it does:* Shows a monthly/weekly calendar grid indicating which dates are taken or available.
+   * *Inputs/Outputs:* Input: Current month; Output: Visual color-coding of dates (e.g., Red = Booked, Green = Available).
+   * *Acceptance Criteria:* Users can see at a glance if a specific date is free before filling out a form.
+2. **Booking Request Form (Customer)**
+   * *What it does:* Allows users to send their details and chosen date to the management.
+   * *Inputs/Outputs:* Name, Phone Number, Email, Event Type, Selected Date.
+   * *Acceptance Criteria:* Cannot submit the form if a required field is empty or if the date is already marked as booked.
+3. **Admin Dashboard (Admin Only)**
+   * *What it does:* A secure password-protected page showing a table of all incoming booking requests.
+   * *Inputs/Outputs:* Action buttons ("Approve" or "Reject").
+   * *Acceptance Criteria:* Approving a request instantly blocks that date on the public calendar. Rejecting it keeps the date open.
+
+## 6. UI/UX Requirements
+* **General Style:** Clean, professional, minimal, and welcoming. 
+* **Color Direction:** Neutral background (white/light gray) with clear status colors (Green for available/success, Red for booked/rejected, Orange for pending).
+* **Navigation:** Single-page style or a simple two-page layout (Home/Calendar/Form vs. Admin Login).
+* **Mobile Behavior:** Must look neat and fit comfortably on smartphone screens since most users browse on phones.
+
+## 7. Platform and Compatibility
+* **Platform:** Web app (accessible via any web browser on phones, tablets, and laptops).
+* **Offline/Online:** Requires internet access to view and submit bookings.
+
+## 8. Technical Preferences (AI/Builder Friendly)
+* **Tech Stack Suggestion:** 
+  * *Frontend & Backend:* Built using a simple full-stack framework or low-code tool (like Next.js, or a Bubble/Glide template if no-code, or an AI builder prompt framework like React + Tailwind CSS + Supabase for data storage).
+  * *Database:* Lightweight open-source database (like PostgreSQL or SQLite) to store dates and booking details.
+* **Authentication:** Simple password login for the single Admin user.
+
+## 9. Data and Content
+* **Data Stored:** 
+  * List of bookings (Customer Name, Contact, Event Type, Date, Status: *Pending/Approved/Rejected*).
+* **Privacy/Safety:** Admin dashboard must be password-protected so random visitors cannot approve or delete bookings.
+
+## 10. Risks and Constraints
+* **Risk:** A customer submits a request for a date that another customer just requested moments before.
+* **Mitigation for V1:** The admin handles conflict resolution manually upon reviewing the pending queue, or the app automatically greys out dates that have a "Pending" status.
+
+## 11. Open Questions
+* Do you want "Pending" requests to immediately block the calendar so no one else can request that same date, or should it only block after the admin clicks "Approve"? *(Assumption for V1: Pending requests temporarily block the date to prevent double requests).*
+
+## 12. Final Build Summary & Next Step
+* **MVP Plan:** Build a 2-page web app named **ECHELON EVENT BOOKING PORTAL**. Page 1 is a calendar + booking form for customers. Page 2 is a secure login screen for the admin to click approve/reject.
+* **Best Next Step:** You can copy this PRD directly into an AI app builder (like Claude, v0, Bolt.new, or ChatGPT) or hand it to a developer with the prompt: *"Build this exact web app based on this PRD for the Echelon Event Booking Portal."*
+
+---
+
+How does the updated PRD look? If you need a ready-to-use **AI Builder Prompt** to paste into an app builder tool to start making it right now, just let me know!

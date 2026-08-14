@@ -53,7 +53,7 @@ export class AdminPortal {
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.setAttribute('download', `HallPass_Bookings_${new Date().toISOString().slice(0,10)}.csv`);
+      link.setAttribute('download', `Echelon_Bookings_${new Date().toISOString().slice(0,10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

@@ -42,7 +42,7 @@ class App {
   }
 
   initTheme() {
-    const savedTheme = localStorage.getItem('hallpass_theme') || 'light';
+    const savedTheme = localStorage.getItem('echelon_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     this.updateThemeIcon(savedTheme);
 
@@ -50,7 +50,7 @@ class App {
       const current = document.documentElement.getAttribute('data-theme');
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('hallpass_theme', next);
+      localStorage.setItem('echelon_theme', next);
       this.updateThemeIcon(next);
     });
   }
